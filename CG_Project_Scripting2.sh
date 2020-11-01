@@ -8,7 +8,7 @@
 # Due Date: October 22, 2020
 
 #### Constants
-email_file=$1
+email_file=$1 #sets the input file as the constant email_file
 
 #### Functions
 
@@ -30,7 +30,7 @@ create_group() #checks to see if a group already exists, if it does not then cre
   fi
 }
 
-email_user() #emails the user their username and password
+email_user() #emails the user their username and password, passing in the username ($1) password ($2) and email ($3) as parameters
 {
   echo "Your account has been created with the username of $1 and your inital password has been set as $2" | mail -s "Account Credentials" $3
 }
@@ -41,7 +41,7 @@ create_users() #creates user accounts with a random password or updates a users 
      username=$(echo $email | cut -d "@" -f 1) #parses out the username
      password=$(openssl rand -base64 12) #creates a random password
 
-     if id $username >/dev/null 2>&1; then #checks to see if user already exists
+     if id $username >/dev/null 2>&1; then #checks to see if user already exists and either changes the password if they do or creates the user if they don't
         echo "$username already exists, changing the password"
         echo "${username}:${password}" | chpasswd
      else
@@ -59,8 +59,8 @@ create_users() #creates user accounts with a random password or updates a users 
 
 #### MAIN
 
-root_user
-create_group
-create_users
+root_user #calls the root_user function
+create_group #calls the create_group function
+create_users #calls the create_users function
 
 
