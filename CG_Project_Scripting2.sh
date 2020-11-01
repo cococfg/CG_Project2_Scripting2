@@ -35,7 +35,7 @@ email_user() #emails the user their username and password
   echo "Your account has been created with the username of $1 and your inital password has been set as $2" | mail -s "Account Credentials" $3
 }
 
-create_accounts() #creates user accounts with a random password or updates a users password if the user account already exists
+create_users() #creates user accounts with a random password or updates a users password if the user account already exists
 {
   while read -r email; do
      username=$(echo $email | cut -d "@" -f 1) #parses out the username
@@ -61,6 +61,6 @@ create_accounts() #creates user accounts with a random password or updates a use
 
 root_user
 create_group
-create_accounts
+create_users
 
 
